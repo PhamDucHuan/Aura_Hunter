@@ -10,12 +10,8 @@ public class PlayerMovement : MonoBehaviour, IFixedUpdateListener, IUpdateListen
     [SerializeField] private Rigidbody2D _rb;
     [SerializeField] private Animator _animator;
     [SerializeField] private CharacterStats characterStats;
+    [SerializeField] private PlayerGroundPound _groundPoundScript;
     private PlayerInput _inputActions;
-
-    [Header("Movement Settings")]
-    //[SerializeField] private float walkSpeed = 5.0f;
-    //[SerializeField] private float runSpeed = 8.0f;
-    //[SerializeField] private float jumpForce = 12.0f;
 
     [Header("Ground Check")]
     [SerializeField] private Transform groundCheck; // Một object con đặt ở chân nhân vật
@@ -33,10 +29,9 @@ public class PlayerMovement : MonoBehaviour, IFixedUpdateListener, IUpdateListen
     private bool _isGrounded;
     private bool _isFacingRight = true;
 
+    public bool IsGrounded => _isGrounded;
     private void Awake()
     {
-        _rb = GetComponent<Rigidbody2D>();
-        _animator = GetComponent<Animator>();
         _inputActions = new PlayerInput();
 
         // Đăng ký các sự kiện input
@@ -89,6 +84,7 @@ public class PlayerMovement : MonoBehaviour, IFixedUpdateListener, IUpdateListen
 
     private void CheckIfGrounded()
     {
+        bool wasGrounded = _isGrounded; // Lưu lại trạng thái của frame trước
         // Tạo một vòng tròn vô hình ở vị trí groundCheck để phát hiện va chạm với groundLayer
         _isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
 
@@ -99,6 +95,11 @@ public class PlayerMovement : MonoBehaviour, IFixedUpdateListener, IUpdateListen
             _jumpsRemaining = maxJumps;
         }
         // ------------------------------------
+        if (!wasGrounded && _isGrounded)
+        {
+            // Gọi hàm xử lý va chạm của script dậm đất
+            _groundPoundScript?.OnLanding();
+        }
     }
 
     private void HandleAnimations()
