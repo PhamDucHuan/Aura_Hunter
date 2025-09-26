@@ -9,17 +9,23 @@ public class PlayerMovement : MonoBehaviour, IFixedUpdateListener, IUpdateListen
     [Header("Components")]
     [SerializeField] private Rigidbody2D _rb;
     [SerializeField] private Animator _animator;
+    [SerializeField] private CharacterStats characterStats;
     private PlayerInput _inputActions;
 
     [Header("Movement Settings")]
-    [SerializeField] private float walkSpeed = 5.0f;
-    [SerializeField] private float runSpeed = 8.0f;
-    [SerializeField] private float jumpForce = 12.0f;
+    //[SerializeField] private float walkSpeed = 5.0f;
+    //[SerializeField] private float runSpeed = 8.0f;
+    //[SerializeField] private float jumpForce = 12.0f;
 
     [Header("Ground Check")]
     [SerializeField] private Transform groundCheck; // Một object con đặt ở chân nhân vật
     [SerializeField] private LayerMask groundLayer; // Layer của các đối tượng được coi là mặt đất
     [SerializeField] private float groundCheckRadius = 0.2f;
+
+    [Header("Jump Settings")]
+    [Tooltip("Số lần nhảy tối đa (1 = nhảy đơn, 2 = nhảy đôi).")]
+    [SerializeField] private int maxJumps = 2; // MỚI: Số lần nhảy tối đa
+    private int _jumpsRemaining; // MỚI: Biến đếm số lần nhảy còn lại
 
     // Biến nội bộ
     private Vector2 _moveInput;
@@ -85,6 +91,14 @@ public class PlayerMovement : MonoBehaviour, IFixedUpdateListener, IUpdateListen
     {
         // Tạo một vòng tròn vô hình ở vị trí groundCheck để phát hiện va chạm với groundLayer
         _isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+
+        // ----- THAY ĐỔI CHO DOUBLE JUMP -----
+        // Nếu nhân vật đang trên mặt đất, hồi lại toàn bộ số lần nhảy
+        if (_isGrounded)
+        {
+            _jumpsRemaining = maxJumps;
+        }
+        // ------------------------------------
     }
 
     private void HandleAnimations()
@@ -103,7 +117,7 @@ public class PlayerMovement : MonoBehaviour, IFixedUpdateListener, IUpdateListen
     private void HandleMovement()
     {
         // Xác định tốc độ hiện tại (đi bộ hoặc chạy nhanh)
-        float currentSpeed = _isSprinting ? runSpeed : walkSpeed;
+        float currentSpeed = _isSprinting ? characterStats.runSpeed : characterStats.walkSpeed;
 
         // Di chuyển nhân vật bằng cách thay đổi vận tốc của Rigidbody2D
         // Chúng ta giữ nguyên vận tốc theo trục Y để không ảnh hưởng đến trọng lực và lực nhảy
@@ -112,12 +126,15 @@ public class PlayerMovement : MonoBehaviour, IFixedUpdateListener, IUpdateListen
 
     private void OnJump(InputAction.CallbackContext context)
     {
-        // Chỉ cho phép nhảy khi đang trên mặt đất
-        if (_isGrounded)
+        // THAY ĐỔI: Kiểm tra xem có còn lượt nhảy nào không, thay vì chỉ kiểm tra isGrounded
+        if (_jumpsRemaining > 0)
         {
-            // Thêm một lực đẩy lên trên để tạo hiệu ứng nhảy
-            _rb.velocity = new Vector2(_rb.velocity.x, 0); // Reset vận tốc y để cú nhảy nhất quán
-            _rb.AddForce(new Vector2(0f, jumpForce), ForceMode2D.Impulse);
+            // Trừ đi một lượt nhảy
+            _jumpsRemaining--;
+
+            // Reset vận tốc y để lực nhảy luôn nhất quán
+            _rb.velocity = new Vector2(_rb.velocity.x, 0);
+            _rb.AddForce(new Vector2(0f, characterStats.jumpForce), ForceMode2D.Impulse);
         }
     }
 
