@@ -1,0 +1,14 @@
+License Agreement
+
+This asset pack is subject to the following terms and conditions:
+
+Use: You are permitted to use the resources contained in this pack for both personal and commercial projects.
+
+Modification: You are allowed to modify the resources as necessary to fit your project's needs.
+
+Redistribution: You are not permitted to redistribute or resell this asset pack, either as part of another asset pack or separately.
+Use in NFTs: You are not permitted to tokenize the resources in this pack as NFTs (non-fungible tokens) or any other form of digital collectible asset for sale or distribution.
+
+Credits: While not mandatory, proper attribution is appreciated in projects where the resources from this pack are used.
+
+Lukya Forge
