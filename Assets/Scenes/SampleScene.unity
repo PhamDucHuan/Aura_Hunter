@@ -445,7 +445,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.88, y: 0.93}
+  m_Size: {x: 1, y: 2.07}
   m_EdgeRadius: 0
 --- !u!50 &476610006
 Rigidbody2D:
@@ -979,6 +979,7 @@ GameObject:
   - component: {fileID: 1448801225}
   - component: {fileID: 1448801226}
   - component: {fileID: 1448801227}
+  - component: {fileID: 1448801228}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1017,14 +1018,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rb: {fileID: 1448801223}
   _animator: {fileID: 1448801226}
-  walkSpeed: 5
-  runSpeed: 8
-  jumpForce: 12
+  characterStats: {fileID: 11400000, guid: 2d210122f40590c49aa8b8ed23286901, type: 2}
   groundCheck: {fileID: 76997340}
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
   groundCheckRadius: 0.2
+  maxJumps: 2
 --- !u!70 &1448801222
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -1202,13 +1202,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb8a2b8030e45f141a091f3b36e3bf98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterStats: {fileID: 11400000, guid: 2d210122f40590c49aa8b8ed23286901, type: 2}
   attackPoint: {fileID: 346797454}
   attackRange: 0.5
-  attackDamage: 40
   enemyLayers:
     serializedVersion: 2
     m_Bits: 128
   attackRate: 2
+--- !u!114 &1448801228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1448801219}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: adf25d2bc5709be48800030541e3af07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterData: {fileID: 11400000, guid: 2d210122f40590c49aa8b8ed23286901, type: 2}
 --- !u!1 &1672909404
 GameObject:
   m_ObjectHideFlags: 0

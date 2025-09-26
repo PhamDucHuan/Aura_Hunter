@@ -15,7 +15,7 @@ MonoBehaviour:
   characterName: Hunter
   characterIcon: {fileID: 0}
   maxHealth: 100
-  baseDamage: 10
+  baseDamage: 40
   armor: 5
   walkSpeed: 5
   runSpeed: 8

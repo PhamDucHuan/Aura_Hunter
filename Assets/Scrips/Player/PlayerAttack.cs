@@ -5,12 +5,13 @@ public class PlayerAttack : MonoBehaviour
 {
     [Header("Components")]
     private Animator _animator;
+    [SerializeField] private CharacterStats characterStats;
     private PlayerInput _inputActions;
 
     [Header("Attack Settings")]
     [SerializeField] private Transform attackPoint; // Vị trí để tạo ra vùng tấn công
     [SerializeField] private float attackRange = 0.5f; // Bán kính của vùng tấn công
-    [SerializeField] private int attackDamage = 40; // Sát thương mỗi đòn đánh
+    //[SerializeField] private int attackDamage = 40; // Sát thương mỗi đòn đánh
     [SerializeField] private LayerMask enemyLayers; // Layer của các đối tượng là kẻ địch
 
     [Header("Attack Cooldown")]
@@ -64,7 +65,7 @@ public class PlayerAttack : MonoBehaviour
             EnemyHealth enemyHealth = enemy.GetComponent<EnemyHealth>();
             if (enemyHealth != null)
             {
-                enemyHealth.TakeDamage(attackDamage);
+                enemyHealth.TakeDamage(characterStats.baseDamage);
             }
         }
     }
