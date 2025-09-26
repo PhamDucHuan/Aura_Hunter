@@ -980,6 +980,7 @@ GameObject:
   - component: {fileID: 1448801226}
   - component: {fileID: 1448801227}
   - component: {fileID: 1448801228}
+  - component: {fileID: 1448801229}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1019,6 +1020,7 @@ MonoBehaviour:
   _rb: {fileID: 1448801223}
   _animator: {fileID: 1448801226}
   characterStats: {fileID: 11400000, guid: 2d210122f40590c49aa8b8ed23286901, type: 2}
+  _groundPoundScript: {fileID: 0}
   groundCheck: {fileID: 76997340}
   groundLayer:
     serializedVersion: 2
@@ -1222,6 +1224,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterData: {fileID: 11400000, guid: 2d210122f40590c49aa8b8ed23286901, type: 2}
+--- !u!114 &1448801229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1448801219}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2042f80e2f34add49a225f698de293c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poundVelocity: -30
+  poundImpactRadius: 0.99
+  poundableLayers:
+    serializedVersion: 2
+    m_Bits: 128
+  impactEffectPrefab: {fileID: 0}
 --- !u!1 &1672909404
 GameObject:
   m_ObjectHideFlags: 0
