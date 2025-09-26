@@ -1,0 +1,149 @@
+﻿using UnityEngine;
+using UnityEngine.InputSystem;
+
+[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(CapsuleCollider2D))]
+[RequireComponent(typeof(Animator))]
+public class PlayerMovement : MonoBehaviour, IFixedUpdateListener, IUpdateListener
+{
+    [Header("Components")]
+    [SerializeField] private Rigidbody2D _rb;
+    [SerializeField] private Animator _animator;
+    private PlayerInput _inputActions;
+
+    [Header("Movement Settings")]
+    [SerializeField] private float walkSpeed = 5.0f;
+    [SerializeField] private float runSpeed = 8.0f;
+    [SerializeField] private float jumpForce = 12.0f;
+
+    [Header("Ground Check")]
+    [SerializeField] private Transform groundCheck; // Một object con đặt ở chân nhân vật
+    [SerializeField] private LayerMask groundLayer; // Layer của các đối tượng được coi là mặt đất
+    [SerializeField] private float groundCheckRadius = 0.2f;
+
+    // Biến nội bộ
+    private Vector2 _moveInput;
+    private bool _isSprinting = false;
+    private bool _isGrounded;
+    private bool _isFacingRight = true;
+
+    private void Awake()
+    {
+        _rb = GetComponent<Rigidbody2D>();
+        _animator = GetComponent<Animator>();
+        _inputActions = new PlayerInput();
+
+        // Đăng ký các sự kiện input
+        _inputActions.Player.Move.performed += ctx => _moveInput = ctx.ReadValue<Vector2>();
+        _inputActions.Player.Move.canceled += ctx => _moveInput = Vector2.zero;
+
+        _inputActions.Player.Sprint.performed += ctx => _isSprinting = true;
+        _inputActions.Player.Sprint.canceled += ctx => _isSprinting = false;
+
+        _inputActions.Player.Jump.performed += OnJump;
+    }
+
+    private void OnEnable()
+    {
+        _inputActions.Player.Enable();
+        if (UpdateManager.Instance != null)
+        {
+            UpdateManager.Instance.RegisterFixedUpdateListener(this);
+            UpdateManager.Instance.RegisterUpdateListener(this);
+        }
+    }
+
+    private void OnDisable()
+    {
+        _inputActions.Player.Disable();
+        if (UpdateManager.Instance != null)
+        {
+            UpdateManager.Instance.UnregisterFixedUpdateListener(this);
+            UpdateManager.Instance.UnregisterUpdateListener(this);
+        }
+    }
+ 
+    public void OnUpdate(float deltaTime)
+    {
+        // Xử lý hoạt ảnh dựa trên trạng thái hiện tại
+        HandleAnimations();
+    }
+
+    public void OnFixedUpdate(float deltaTime)
+    {
+        // Kiểm tra xem nhân vật có đang trên mặt đất không
+        CheckIfGrounded();
+
+        // Xử lý di chuyển ngang
+        HandleMovement();
+
+        // Xử lý lật hình nhân vật
+        FlipCharacter();
+    }
+
+    private void CheckIfGrounded()
+    {
+        // Tạo một vòng tròn vô hình ở vị trí groundCheck để phát hiện va chạm với groundLayer
+        _isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+    }
+
+    private void HandleAnimations()
+    {
+        // Lấy tốc độ di chuyển ngang tuyệt đối để quyết định giữa idle và run
+        float horizontalSpeed = Mathf.Abs(_rb.velocity.x);
+        _animator.SetFloat("speed", horizontalSpeed);
+
+        // Cập nhật trạng thái isGrounded
+        _animator.SetBool("isGrounded", _isGrounded);
+
+        // Cập nhật vận tốc trục Y để quyết định giữa jump và fall
+        _animator.SetFloat("yVelocity", _rb.velocity.y);
+    }
+
+    private void HandleMovement()
+    {
+        // Xác định tốc độ hiện tại (đi bộ hoặc chạy nhanh)
+        float currentSpeed = _isSprinting ? runSpeed : walkSpeed;
+
+        // Di chuyển nhân vật bằng cách thay đổi vận tốc của Rigidbody2D
+        // Chúng ta giữ nguyên vận tốc theo trục Y để không ảnh hưởng đến trọng lực và lực nhảy
+        _rb.velocity = new Vector2(_moveInput.x * currentSpeed, _rb.velocity.y);
+    }
+
+    private void OnJump(InputAction.CallbackContext context)
+    {
+        // Chỉ cho phép nhảy khi đang trên mặt đất
+        if (_isGrounded)
+        {
+            // Thêm một lực đẩy lên trên để tạo hiệu ứng nhảy
+            _rb.velocity = new Vector2(_rb.velocity.x, 0); // Reset vận tốc y để cú nhảy nhất quán
+            _rb.AddForce(new Vector2(0f, jumpForce), ForceMode2D.Impulse);
+        }
+    }
+
+    private void FlipCharacter()
+    {
+        // Nếu nhân vật đang di chuyển sang trái và đang quay mặt sang phải
+        if (_moveInput.x < 0 && _isFacingRight)
+        {
+            // Lật nhân vật
+            transform.localScale = new Vector3(-1 * Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+            _isFacingRight = false;
+        }
+        // Nếu nhân vật đang di chuyển sang phải và đang quay mặt sang trái
+        else if (_moveInput.x > 0 && !_isFacingRight)
+        {
+            // Lật nhân vật lại
+            transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+            _isFacingRight = true;
+        }
+    }
+
+    // (Tùy chọn) Vẽ ra vòng tròn kiểm tra mặt đất trong Scene view để dễ debug
+    private void OnDrawGizmosSelected()
+    {
+        if (groundCheck == null) return;
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
+    }
+}
