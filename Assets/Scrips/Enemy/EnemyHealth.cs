@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour, IPoundable
 {
@@ -16,7 +17,13 @@ public class EnemyHealth : MonoBehaviour, IPoundable
         Debug.Log(transform.name + " took " + damage + " damage.");
 
         //(Tùy chọn) Thêm hiệu ứng bị đánh, ví dụ: đổi màu trong chốc lát
-         GetComponent<SpriteRenderer>().color = Color.red;
+        StartCoroutine(ResetColorCoroutine());
+    }
+
+    private IEnumerator ResetColorCoroutine()
+    {
+        yield return new WaitForSeconds(0.3f);
+        GetComponent<SpriteRenderer>().color = Color.red;
         Invoke("ResetColor", 0.1f);
 
         if (_currentHealth <= 0)

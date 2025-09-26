@@ -148,7 +148,7 @@ Transform:
   m_GameObject: {fileID: 76997339}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.5, z: 0}
+  m_LocalPosition: {x: -0.09, y: -1.04, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -334,7 +334,7 @@ Transform:
   m_GameObject: {fileID: 346797453}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.34, y: 0, z: 0}
+  m_LocalPosition: {x: 0.62, y: -0.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -944,7 +944,7 @@ MonoBehaviour:
   _rb: {fileID: 1448801223}
   _animator: {fileID: 1448801226}
   characterStats: {fileID: 11400000, guid: 2d210122f40590c49aa8b8ed23286901, type: 2}
-  _groundPoundScript: {fileID: 0}
+  _groundPoundScript: {fileID: 1448801229}
   groundCheck: {fileID: 76997340}
   groundLayer:
     serializedVersion: 2
@@ -984,7 +984,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.6875, y: 0.96875}
+  m_Size: {x: 1, y: 2.09}
   m_Direction: 0
 --- !u!50 &1448801223
 Rigidbody2D:
@@ -1130,7 +1130,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterStats: {fileID: 11400000, guid: 2d210122f40590c49aa8b8ed23286901, type: 2}
   attackPoint: {fileID: 346797454}
-  attackRange: 0.5
+  attackRange: 0.75
   enemyLayers:
     serializedVersion: 2
     m_Bits: 128
@@ -1161,7 +1161,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   poundVelocity: -30
-  poundImpactRadius: 0.99
+  poundImpactRadius: 1.49
   poundableLayers:
     serializedVersion: 2
     m_Bits: 128
