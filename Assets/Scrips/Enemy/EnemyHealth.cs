@@ -41,7 +41,8 @@ public class EnemyHealth : MonoBehaviour, IPoundable
     {
         Debug.Log(transform.name + " died.");
         // (Tùy chọn) Kích hoạt animation chết, tạo hiệu ứng nổ, rơi vật phẩm...
-        Destroy(gameObject);
+        //Destroy(gameObject);
+        gameObject.SetActive(false); // Vô hiệu hóa thay vì hủy để có thể tái sử dụng
     }
 
     public void OnPounded()

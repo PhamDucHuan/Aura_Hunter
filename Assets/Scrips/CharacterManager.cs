@@ -1,12 +1,14 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class CharacterManager : MonoBehaviour
 {
     // Kéo file ScriptableObject Stats (ví dụ: PlayerStats) vào đây trong Inspector
-    public CharacterStats characterData;
+    [SerializeField] private CharacterStats characterData;
+    [SerializeField] private Slider healthSlider; // Thanh hiển thị máu 
 
     // Các biến trạng thái hiện tại của nhân vật
-    private int _currentHealth;
+    [SerializeField] private int _currentHealth;
 
     void Awake()
     {
@@ -15,6 +17,9 @@ public class CharacterManager : MonoBehaviour
         {
             gameObject.name = characterData.characterName;
             _currentHealth = characterData.maxHealth;
+
+            healthSlider.maxValue = characterData.maxHealth;
+            healthSlider.value = characterData.maxHealth;
         }
         else
         {
@@ -34,6 +39,7 @@ public class CharacterManager : MonoBehaviour
         {
             Die();
         }
+        healthSlider.value = _currentHealth;
     }
 
     private void Die()

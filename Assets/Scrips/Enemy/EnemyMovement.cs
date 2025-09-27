@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 
+[RequireComponent(typeof(EnemyAttack))]
 public class EnemyMovement : MonoBehaviour
 {
     // --- Các biến có thể chỉnh trong Inspector ---
@@ -8,16 +9,17 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] private Transform[] patrolPoints;
 
     [Header("Combat")]
-    [SerializeField] private float attackRange = 1f;      // Khoảng cách để tấn công
-    [SerializeField] private float attackCooldown = 2f;   // Thời gian nghỉ giữa các đòn đánh
-    [SerializeField] private GameObject attackHitbox;     // Vùng gây sát thương
-    [SerializeField] private float stopChaseDistance = 0.5f; // Khoảng cách dừng lại khi đuổi theo
+    [SerializeField] private float attackRange = 1f;
+    [SerializeField] private float stopChaseDistance = 1.5f; // **BIẾN MỚI:** Khoảng cách dừng lại khi đuổi theo
+    [SerializeField] private float attackCooldown = 2f;
+
     // --- Biến nội bộ ---
     private Animator anim;
     private Rigidbody2D rb;
     private Transform player;
     private int patrolIndex = 0;
-    private float lastAttackTime = -999f; // Đặt giá trị âm để có thể tấn công ngay lần đầu
+    private float lastAttackTime = -999f;
+    private EnemyAttack _enemyAttack;
 
     // --- State Machine ---
     private enum State { Patrolling, Chasing, Attacking }
@@ -27,17 +29,17 @@ public class EnemyMovement : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
+
+        _enemyAttack = GetComponent<EnemyAttack>();
     }
 
     void Start()
     {
         currentState = State.Patrolling;
-        attackHitbox.SetActive(false); // Đảm bảo hitbox đã tắt khi bắt đầu
     }
 
     void Update()
     {
-        // "Bộ não" của kẻ thù
         switch (currentState)
         {
             case State.Patrolling:
@@ -83,70 +85,63 @@ public class EnemyMovement : MonoBehaviour
 
         float distanceToPlayer = Vector2.Distance(transform.position, player.position);
 
+        // **LOGIC ĐÃ CẬP NHẬT**
         if (distanceToPlayer < attackRange)
         {
-            // Nếu đủ gần tầm tấn công, chuyển sang tấn công
+            // Nếu đủ gần, chuyển sang tấn công
             currentState = State.Attacking;
         }
-        // THÊM ĐIỀU KIỆN MỚI TẠI ĐÂY
-        else if (distanceToPlayer > stopChaseDistance) // Nếu còn xa hơn khoảng cách dừng
+        else if (distanceToPlayer > stopChaseDistance)
         {
-            // Tiếp tục đuổi theo
+            // Nếu còn xa, tiếp tục đuổi theo
             anim.SetBool("isWalking", true);
             Vector2 direction = (player.position - transform.position).normalized;
             rb.velocity = new Vector2(direction.x * moveSpeed, rb.velocity.y);
             FlipSprite(direction.x);
         }
-        else // Kẻ thù đã ở trong khoảng cách dừng nhưng chưa vào tầm tấn công
+        else
         {
-            rb.velocity = Vector2.zero; // Dừng lại
-            anim.SetBool("isWalking", false); // Chuyển sang animation idle
+            // Nếu ở giữa khoảng cách tấn công và khoảng cách dừng, thì đứng yênrb.velocity = Vector2.zero;
+            anim.SetBool("isWalking", false);
         }
     }
 
     private void Attack()
     {
-        // Đứng yên khi tấn công
         rb.velocity = Vector2.zero;
         anim.SetBool("isWalking", false);
 
-        // Kiểm tra xem đã hết thời gian nghỉ chưa
+        // Lật mặt về phía người chơi
+        if (player != null)
+        {
+            float directionToPlayer = player.position.x - transform.position.x;
+            FlipSprite(directionToPlayer);
+        }
+
+        // Kiểm tra cooldown
         if (Time.time > lastAttackTime + attackCooldown)
         {
-            lastAttackTime = Time.time; // Cập nhật thời gian tấn công cuối
-            anim.SetTrigger("attack");    // Kích hoạt animation tấn công
+            lastAttackTime = Time.time;
+
+            // GỌI HÀM TẤN CÔNG TỪ SCRIPT MỚI
+            _enemyAttack.PerformAttack();
         }
         else
         {
-            // Nếu đang trong thời gian nghỉ, quay lại đuổi theo
-            // (Điều này ngăn kẻ thù bị "đơ" nếu người chơi lùi ra khỏi tầm đánh)
+            // Nếu đang cooldown, quay lại đuổi theo
             currentState = State.Chasing;
         }
     }
 
-    // --- Các hàm hỗ trợ ---
-
     private void FlipSprite(float directionX)
     {
-        // Đảo ngược logic quay mặt nếu sprite gốc của bạn hướng về bên trái
+        // Giả sử sprite gốc của bạn hướng về bên trái
         if (directionX > 0)
             transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
         else if (directionX < 0)
             transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
     }
 
-    // --- CÁC HÀM NÀY SẼ ĐƯỢC GỌI BẰNG ANIMATION EVENT ---
-    public void EnableAttackHitbox()
-    {
-        attackHitbox.SetActive(true);
-    }
-
-    public void DisableAttackHitbox()
-    {
-        attackHitbox.SetActive(false);
-    }
-
-    // --- Xử lý Trigger va chạm của DetectionZone ---
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Player"))
@@ -161,7 +156,6 @@ public class EnemyMovement : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             player = null;
-            // Khi người chơi rời đi, trạng thái Chase sẽ tự động chuyển về Patrol
         }
     }
 }
