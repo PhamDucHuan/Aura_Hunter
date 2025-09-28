@@ -131,7 +131,7 @@ public class PlayerMovement : MonoBehaviour, IFixedUpdateListener, IUpdateListen
         if (_jumpsRemaining > 0)
         {
             // Trừ đi một lượt nhảy
-            _jumpsRemaining--;
+            _jumpsRemaining =- 1;
 
             // Reset vận tốc y để lực nhảy luôn nhất quán
             _rb.velocity = new Vector2(_rb.velocity.x, 0);

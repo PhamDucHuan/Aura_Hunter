@@ -13,6 +13,11 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] private float stopChaseDistance = 1.5f; // **BIẾN MỚI:** Khoảng cách dừng lại khi đuổi theo
     [SerializeField] private float attackCooldown = 2f;
 
+    // <<< BIẾN MỚI CHO VIỆC DÒ TÌM BẰNG RAYCAST >>>
+    [Header("Player Detection")]
+    [SerializeField] private float detectionRadius = 5f; // Bán kính "radar" để phát hiện người chơi
+    [SerializeField] private LayerMask playerLayer;      // Layer của người chơi để CircleCast chỉ tìm kiếm đối tượng này
+
     // --- Biến nội bộ ---
     private Animator anim;
     private Rigidbody2D rb;
@@ -43,6 +48,8 @@ public class EnemyMovement : MonoBehaviour
         switch (currentState)
         {
             case State.Patrolling:
+                FindPlayer();
+
                 Patrol();
                 break;
             case State.Chasing:
@@ -53,6 +60,34 @@ public class EnemyMovement : MonoBehaviour
                 break;
         }
     }
+
+    // <<< HÀM MỚI: SỬ DỤNG CIRCLECAST ĐỂ TÌM NGƯỜI CHƠI >>>
+    private void FindPlayer()
+    {
+        // Bắn một "radar" hình tròn từ vị trí của quái vật với bán kính detectionRadius,
+        // chỉ tìm kiếm các đối tượng trên playerLayer.
+        RaycastHit2D hit = Physics2D.CircleCast(transform.position, detectionRadius, Vector2.zero, 0f, playerLayer);
+
+        if (hit.collider != null) // Nếu "radar" trúng một thứ gì đó (chính là người chơi)
+        {
+            player = hit.transform; // Lưu lại transform của người chơi
+            if (currentState == State.Patrolling)
+            {
+                currentState = State.Chasing; // Nếu đang đi tuần thì chuyển sang đuổi theo
+            }
+        }
+        else // Nếu không tìm thấy người chơi trong bán kính
+        {
+            player = null; // Bỏ tham chiếu đến người chơi
+            if (currentState == State.Chasing || currentState == State.Attacking)
+            {
+                currentState = State.Patrolling; // Nếu đang đuổi hoặc tấn công, quay về đi tuần
+                rb.velocity = Vector2.zero; // Dừng di chuyển ngay lập tức
+                anim.SetBool("isWalking", false);
+            }
+        }
+    }
+
 
     private void Patrol()
     {
@@ -79,30 +114,32 @@ public class EnemyMovement : MonoBehaviour
         if (player == null)
         {
             currentState = State.Patrolling;
-            anim.SetBool("isWalking", false);
             return;
         }
 
         float distanceToPlayer = Vector2.Distance(transform.position, player.position);
 
-        // **LOGIC ĐÃ CẬP NHẬT**
-        if (distanceToPlayer < attackRange)
+        // NẾU VÀO TẦM ĐÁNH -> TẤN CÔNG
+        if (distanceToPlayer <= attackRange)
         {
-            // Nếu đủ gần, chuyển sang tấn công
             currentState = State.Attacking;
         }
+        // NẾU NGOÀI KHOẢNG DỪNG -> TIẾP TỤC ĐUỔI
         else if (distanceToPlayer > stopChaseDistance)
         {
-            // Nếu còn xa, tiếp tục đuổi theo
             anim.SetBool("isWalking", true);
             Vector2 direction = (player.position - transform.position).normalized;
             rb.velocity = new Vector2(direction.x * moveSpeed, rb.velocity.y);
             FlipSprite(direction.x);
         }
+        // NẾU Ở GIỮA KHOẢNG DỪNG VÀ TẦM ĐÁNH -> ĐỨNG YÊN CHỜ
         else
         {
-            // Nếu ở giữa khoảng cách tấn công và khoảng cách dừng, thì đứng yênrb.velocity = Vector2.zero;
+            rb.velocity = Vector2.zero;
             anim.SetBool("isWalking", false);
+            // Quay mặt về phía người chơi khi chờ
+            float directionToPlayer = player.position.x - transform.position.x;
+            FlipSprite(directionToPlayer);
         }
     }
 
@@ -111,25 +148,27 @@ public class EnemyMovement : MonoBehaviour
         rb.velocity = Vector2.zero;
         anim.SetBool("isWalking", false);
 
-        // Lật mặt về phía người chơi
-        if (player != null)
+        // Nếu người chơi đã chạy ra khỏi tầm đánh, quay lại đuổi theo
+        if (player == null || Vector2.Distance(transform.position, player.position) > attackRange)
         {
-            float directionToPlayer = player.position.x - transform.position.x;
-            FlipSprite(directionToPlayer);
+            currentState = State.Chasing;
+            return; // Thoát khỏi hàm Attack
         }
 
-        // Kiểm tra cooldown
+        // Quay mặt về phía người chơi trước khi tấn công
+        float directionToPlayer = player.position.x - transform.position.x;
+        FlipSprite(directionToPlayer);
+
+        // Kiểm tra cooldown và tấn công
         if (Time.time > lastAttackTime + attackCooldown)
         {
             lastAttackTime = Time.time;
 
-            // GỌI HÀM TẤN CÔNG TỪ SCRIPT MỚI
+            // Dòng này gọi animation tấn công, bạn cần tạo trigger "Attack" trong Animator
+            anim.SetTrigger("Attack");
+
+            // Gọi hàm gây sát thương từ script EnemyAttack
             _enemyAttack.PerformAttack();
-        }
-        else
-        {
-            // Nếu đang cooldown, quay lại đuổi theo
-            currentState = State.Chasing;
         }
     }
 
@@ -142,20 +181,14 @@ public class EnemyMovement : MonoBehaviour
             transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnDrawGizmosSelected()
     {
-        if (other.gameObject.CompareTag("Player"))
-        {
-            player = other.transform;
-            currentState = State.Chasing;
-        }
-    }
+        // --- Vẽ bán kính dò tìm ---
+        Gizmos.color = Color.yellow; // Màu vàng cho dò tìm
+        Gizmos.DrawWireSphere(transform.position, detectionRadius);
 
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.gameObject.CompareTag("Player"))
-        {
-            player = null;
-        }
+        // --- Vẽ tầm đánh ---
+        Gizmos.color = Color.red; // Màu đỏ cho tầm đánh
+        Gizmos.DrawWireSphere(transform.position, attackRange);
     }
 }

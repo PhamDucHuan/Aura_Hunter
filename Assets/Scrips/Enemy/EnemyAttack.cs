@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 [RequireComponent(typeof(EnemyAttack))]
 public class EnemyAttack : MonoBehaviour
@@ -16,6 +17,9 @@ public class EnemyAttack : MonoBehaviour
     [Tooltip("Layer của đối tượng mà Enemy sẽ tấn công (thường là Player)")]
     [SerializeField] private LayerMask playerLayer;
 
+    [Tooltip("Thời gian chờ (tính bằng giây) từ lúc bắt đầu animation đến lúc thực sự gây sát thương")]
+    [SerializeField] private float damageDelay = 0.3f;
+
     private void Awake()
     {
         _animator = GetComponent<Animator>();
@@ -27,17 +31,26 @@ public class EnemyAttack : MonoBehaviour
         // 1. Kích hoạt animation tấn công
         _animator.SetTrigger("attack");
 
-        // 2. Phát hiện người chơi trong vùng tấn công
+        // 2. Bắt đầu một Coroutine để xử lý việc gây sát thương sau một khoảng chờ
+        StartCoroutine(DealDamageAfterDelay());
+    }
+
+    // <<< HÀM COROUTINE MỚI >>>
+    private IEnumerator DealDamageAfterDelay()
+    {
+        // 1. Chờ một khoảng thời gian bằng giá trị của damageDelay
+        yield return new WaitForSeconds(damageDelay);
+
+        // 2. Sau khi chờ, kiểm tra xem người chơi CÓ CÒN trong vùng tấn công không
         Collider2D[] hitPlayers = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, playerLayer);
 
-        // 3. Gây sát thương cho người chơi
+        // 3. Gây sát thương cho những người chơi vẫn còn trong vùng
         foreach (Collider2D player in hitPlayers)
         {
-            Debug.Log("Enemy hit " + player.name);
+            Debug.Log("Enemy hit " + player.name + " after a delay.");
             CharacterManager playerHealth = player.GetComponent<CharacterManager>();
             if (playerHealth != null)
             {
-                // Lấy sát thương từ ScriptableObject
                 playerHealth.TakeDamage(attackDamage);
             }
         }
