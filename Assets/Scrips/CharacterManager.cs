@@ -10,15 +10,12 @@ public class CharacterManager : MonoBehaviour
     // Các biến trạng thái hiện tại của nhân vật
     [SerializeField] private int _currentHealth;
 
-    public void Initialize(CharacterStats newData)
+    public void Awake()
     {
-        characterData = newData; // Gán dữ liệu mới
-
         if (characterData != null)
         {
             gameObject.name = "Player (" + characterData.characterName + ")";
             _currentHealth = characterData.maxHealth;
-
             if (healthSlider != null)
             {
                 healthSlider.maxValue = characterData.maxHealth;

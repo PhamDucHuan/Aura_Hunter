@@ -241,6 +241,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPoint: {fileID: 1089350846}
+  virtualCamera: {fileID: 1717101648}
 --- !u!4 &471552198
 Transform:
   m_ObjectHideFlags: 0
@@ -253,7 +254,8 @@ Transform:
   m_LocalPosition: {x: 2.6544752, y: 0.7991969, z: -0.08889999}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1089350846}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &476610001
@@ -876,12 +878,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1089350845}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.53, y: 0.22, z: -0.08889999}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -7.1844754, y: -0.57919693, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 471552198}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1148480755
 GameObject:
@@ -1735,4 +1737,3 @@ SceneRoots:
   - {fileID: 1148480758}
   - {fileID: 790065150}
   - {fileID: 471552198}
-  - {fileID: 1089350846}

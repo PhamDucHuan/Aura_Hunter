@@ -157,11 +157,6 @@ public class PlayerMovement : MonoBehaviour, IFixedUpdateListener, IUpdateListen
         }
     }
 
-    public void UpdateStats(CharacterStats newStats)
-    {
-        characterStats = newStats;
-    }
-
     private void OnDrawGizmosSelected()
     {
         if (groundCheck == null) return;
