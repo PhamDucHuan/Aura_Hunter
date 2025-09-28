@@ -7,6 +7,7 @@ public class CharacterStats : ScriptableObject
     [Header("Character Info")]
     public string characterName = "New Character";
     public Sprite characterIcon; // Dùng cho UI
+    public RuntimeAnimatorController animatorController; // Để thay đổi bộ animation
 
     [Header("Primary Stats")]
     [Tooltip("Lượng máu tối đa của nhân vật.")]
