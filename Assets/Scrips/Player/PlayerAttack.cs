@@ -70,6 +70,11 @@ public class PlayerAttack : MonoBehaviour
         }
     }
 
+    public void UpdateStats(CharacterStats newStats)
+    {
+        characterStats = newStats;
+    }
+
     // (Tùy chọn) Vẽ ra vùng tấn công trong Scene View để dễ dàng căn chỉnh
     private void OnDrawGizmosSelected()
     {

@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0354633758a0384abed7457fa215072, type: 3}
   m_Name: MageStats
   m_EditorClassIdentifier: 
-  characterName: New Character
-  characterIcon: {fileID: 0}
-  animatorController: {fileID: 0}
+  characterName: MageStats
+  characterIcon: {fileID: 21300000, guid: b9c8e731c5d16a5479bd206a05a1ca98, type: 3}
+  animatorController: {fileID: 9100000, guid: 9331f3c2946497d4d9f393f69b9c9faf, type: 2}
   maxHealth: 100
   baseDamage: 10
   armor: 5

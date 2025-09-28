@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: HunterState
   m_EditorClassIdentifier: 
   characterName: Hunter
-  characterIcon: {fileID: 0}
+  characterIcon: {fileID: 21300000, guid: 26c9417cc82e697428bad00523fcbc94, type: 3}
+  animatorController: {fileID: 9100000, guid: 9331f3c2946497d4d9f393f69b9c9faf, type: 2}
   maxHealth: 100
   baseDamage: 40
   armor: 5

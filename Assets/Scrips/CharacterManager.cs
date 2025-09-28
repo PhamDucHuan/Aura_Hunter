@@ -10,16 +10,20 @@ public class CharacterManager : MonoBehaviour
     // Các biến trạng thái hiện tại của nhân vật
     [SerializeField] private int _currentHealth;
 
-    void Awake()
+    public void Initialize(CharacterStats newData)
     {
-        // Khởi tạo các giá trị ban đầu từ ScriptableObject
+        characterData = newData; // Gán dữ liệu mới
+
         if (characterData != null)
         {
-            gameObject.name = characterData.characterName;
+            gameObject.name = "Player (" + characterData.characterName + ")";
             _currentHealth = characterData.maxHealth;
 
-            healthSlider.maxValue = characterData.maxHealth;
-            healthSlider.value = characterData.maxHealth;
+            if (healthSlider != null)
+            {
+                healthSlider.maxValue = characterData.maxHealth;
+                healthSlider.value = characterData.maxHealth;
+            }
         }
         else
         {
@@ -47,5 +51,10 @@ public class CharacterManager : MonoBehaviour
         Debug.Log(characterData.characterName + " has died.");
         // Xử lý logic khi chết
         Destroy(gameObject);
+    }
+
+    public CharacterStats GetCharacterData()
+    {
+        return characterData;
     }
 }

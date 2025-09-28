@@ -157,7 +157,11 @@ public class PlayerMovement : MonoBehaviour, IFixedUpdateListener, IUpdateListen
         }
     }
 
-    // (Tùy chọn) Vẽ ra vòng tròn kiểm tra mặt đất trong Scene view để dễ debug
+    public void UpdateStats(CharacterStats newStats)
+    {
+        characterStats = newStats;
+    }
+
     private void OnDrawGizmosSelected()
     {
         if (groundCheck == null) return;
