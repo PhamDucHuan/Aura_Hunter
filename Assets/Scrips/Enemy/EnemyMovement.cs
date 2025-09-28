@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 [RequireComponent(typeof(EnemyAttack))]
-public class EnemyMovement : MonoBehaviour
+public class EnemyMovement : MonoBehaviour, IUpdateListener
 {
     // --- Các biến có thể chỉnh trong Inspector ---
     [Header("Movement")]
@@ -38,12 +38,27 @@ public class EnemyMovement : MonoBehaviour
         _enemyAttack = GetComponent<EnemyAttack>();
     }
 
+    private void OnEnable()
+    {
+        if (UpdateManager.Instance != null)
+        {
+            UpdateManager.Instance.RegisterUpdateListener(this);
+        }
+    }
+    private void OnDisable()
+    {
+        if (UpdateManager.Instance != null)
+        {
+            UpdateManager.Instance.UnregisterUpdateListener(this);
+        }
+    }
+
     void Start()
     {
         currentState = State.Patrolling;
     }
 
-    void Update()
+    public void OnUpdate(float deltaTime)
     {
         switch (currentState)
         {

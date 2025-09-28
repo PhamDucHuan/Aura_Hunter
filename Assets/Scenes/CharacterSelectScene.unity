@@ -206,7 +206,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 985535590}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: CharacterSelectUI, Assembly-CSharp
         m_MethodName: NextCharacter
         m_Mode: 1
@@ -715,7 +715,6 @@ GameObject:
   m_Component:
   - component: {fileID: 985535589}
   - component: {fileID: 985535588}
-  - component: {fileID: 985535590}
   m_Layer: 0
   m_Name: GameManager_Persistent
   m_TagString: Untagged
@@ -751,26 +750,54 @@ Transform:
   m_LocalPosition: {x: -5.353195, y: -0.5321418, z: -0.086102076}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1171734336}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &985535590
+--- !u!1 &1171734334
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1171734336}
+  - component: {fileID: 1171734335}
+  m_Layer: 0
+  m_Name: UpdateManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1171734335
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 985535587}
+  m_GameObject: {fileID: 1171734334}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54fbc800b7c57864f981d1b8b1dcb8db, type: 3}
+  m_Script: {fileID: 11500000, guid: b475c50dbb51d5a47a08860eb7f07e16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterIcon: {fileID: 495265243}
-  characterNameText: {fileID: 1875912984}
-  nextButton: {fileID: 226575946}
-  prevButton: {fileID: 1264004613}
-  startButton: {fileID: 1743830880}
+--- !u!4 &1171734336
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1171734334}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 5.408022, y: -5.4214215, z: 0.08759163}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 985535589}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1264004611
 GameObject:
   m_ObjectHideFlags: 0
@@ -854,7 +881,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 985535590}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: CharacterSelectUI, Assembly-CSharp
         m_MethodName: PreviousCharacter
         m_Mode: 1
@@ -1173,6 +1200,7 @@ GameObject:
   - component: {fileID: 1869024091}
   - component: {fileID: 1869024090}
   - component: {fileID: 1869024089}
+  - component: {fileID: 1869024092}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -1230,6 +1258,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1869024092
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1869024088}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54fbc800b7c57864f981d1b8b1dcb8db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterIcon: {fileID: 495265243}
+  characterNameText: {fileID: 1875912984}
+  nextButton: {fileID: 226575946}
+  prevButton: {fileID: 1264004613}
+  startButton: {fileID: 1743830880}
 --- !u!1 &1869160116
 GameObject:
   m_ObjectHideFlags: 0
