@@ -205,19 +205,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 226575947}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: CharacterSelectUI, Assembly-CSharp
-        m_MethodName: NextCharacter
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &226575947
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -880,19 +868,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1264004614}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: CharacterSelectUI, Assembly-CSharp
-        m_MethodName: PreviousCharacter
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1264004614
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1081,7 +1057,7 @@ GameObject:
   - component: {fileID: 1743830881}
   - component: {fileID: 1743830880}
   m_Layer: 5
-  m_Name: Play
+  m_Name: Selec
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1274,7 +1250,8 @@ MonoBehaviour:
   characterNameText: {fileID: 1875912984}
   nextButton: {fileID: 226575946}
   prevButton: {fileID: 1264004613}
-  startButton: {fileID: 1743830880}
+  selectButton: {fileID: 1743830880}
+  characterSelectPanel: {fileID: 0}
 --- !u!1 &1869160116
 GameObject:
   m_ObjectHideFlags: 0

@@ -10,7 +10,10 @@ public class CharacterSelectUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI characterNameText;
     [SerializeField] private Button nextButton;
     [SerializeField] private Button prevButton;
-    [SerializeField] private Button startButton;
+    [SerializeField] private Button selectButton;
+
+    [Tooltip("Kéo Panel chứa toàn bộ UI chọn nhân vật vào đây")]
+    [SerializeField] private GameObject characterSelectPanel;
 
     private int _currentIndex = 0;
 
@@ -18,28 +21,57 @@ public class CharacterSelectUI : MonoBehaviour
     {
         nextButton.onClick.AddListener(NextCharacter);
         prevButton.onClick.AddListener(PreviousCharacter);
-        startButton.onClick.AddListener(StartGame);
+        selectButton.onClick.AddListener(ConfirmSelection);
 
-        DisplayCharacter(_currentIndex);
+        if (GameManager.Instance != null && GameManager.Instance.characterPrefabs.Count > 0)
+        {
+            DisplayCharacter(_currentIndex);
+        }
+        else
+        {
+            // Nếu không, báo lỗi và vô hiệu hóa UI để tránh lỗi
+            Debug.LogError("GameManager chưa sẵn sàng hoặc danh sách nhân vật rỗng!");
+            characterIcon.gameObject.SetActive(false);
+            characterNameText.text = "Không có nhân vật";
+            nextButton.interactable = false;
+            prevButton.interactable = false;
+            selectButton.interactable = false;
+        }
     }
 
     private void DisplayCharacter(int index)
     {
-        // Lấy prefab từ GameManager
-        GameObject characterPrefab = GameManager.Instance.characterPrefabs[index];
-
-        // Lấy component CharacterManager từ prefab để đọc dữ liệu
-        CharacterManager manager = characterPrefab.GetComponent<CharacterManager>();
-        if (manager != null)
+        // <<< THAY ĐỔI: Thêm các bước kiểm tra an toàn >>>
+        if (GameManager.Instance == null || GameManager.Instance.characterPrefabs.Count == 0)
         {
-            CharacterStats stats = manager.GetCharacterData();
-            // Cập nhật UI
-            characterIcon.sprite = stats.characterIcon;
-            characterNameText.text = stats.characterName;
+            Debug.LogError("Không thể hiển thị nhân vật vì GameManager chưa sẵn sàng hoặc danh sách rỗng.");
+            return; // Dừng hàm tại đây
         }
 
-        // Lưu prefab đã chọn vào GameManager
-        GameManager.Instance.SelectCharacter(characterPrefab);
+        GameObject characterPrefab = GameManager.Instance.characterPrefabs[index];
+        if (characterPrefab == null)
+        {
+            Debug.LogError($"Prefab tại vị trí {index} trong GameManager bị rỗng (None)!");
+            return;
+        }
+
+        CharacterManager manager = characterPrefab.GetComponent<CharacterManager>();
+        if (manager == null)
+        {
+            Debug.LogError($"Prefab '{characterPrefab.name}' bị thiếu component CharacterManager!");
+            return;
+        }
+
+        CharacterStats stats = manager.GetCharacterData();
+        if (stats == null)
+        {
+            Debug.LogError($"Prefab '{characterPrefab.name}' chưa được gán CharacterStats trong component CharacterManager!");
+            return;
+        }
+
+        // Nếu mọi thứ đều ổn, cập nhật UI
+        characterIcon.sprite = stats.characterIcon;
+        characterNameText.text = stats.characterName;
     }
 
     // Các hàm NextCharacter, PreviousCharacter, StartGame giữ nguyên không đổi
@@ -59,9 +91,23 @@ public class CharacterSelectUI : MonoBehaviour
         DisplayCharacter(_currentIndex);
     }
 
-    public void StartGame()
+    public void ConfirmSelection()
     {
-        // Thay "GameScene" bằng tên Scene game của bạn
-        SceneManager.LoadScene("SampleScene");
+        // 1. Lấy prefab nhân vật đang được hiển thị
+        GameObject selectedPrefab = GameManager.Instance.characterPrefabs[_currentIndex];
+
+        // 2. "Chốt" lựa chọn này và báo cho GameManager
+        GameManager.Instance.SelectCharacter(selectedPrefab);
+
+        Debug.Log("Player confirmed selection: " + selectedPrefab.name);
+
+        // 3. Ẩn giao diện chọn nhân vật đi
+        if (characterSelectPanel != null)
+        {
+            characterSelectPanel.SetActive(false);
+        }
+
+        // 4. (Tùy chọn) Hiện lại menu chính hoặc một giao diện khác ở đây
+        // mainMenuPanel.SetActive(true);
     }
 }
