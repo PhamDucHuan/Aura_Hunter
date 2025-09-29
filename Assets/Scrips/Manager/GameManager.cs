@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -10,6 +9,7 @@ public class GameManager : MonoBehaviour
     [Header("Character Prefabs")]
     public List<GameObject> characterPrefabs;
 
+    public LevelData SelectedLevel { get; private set; }
     // THAY ĐỔI: Lưu trữ GameObject prefab thay vì CharacterStats
     public GameObject SelectedCharacterPrefab { get; private set; }
 
@@ -24,6 +24,12 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    public void SelectLevel(LevelData levelData)
+    {
+        SelectedLevel = levelData;
+        Debug.Log("Level selected: " + levelData.displayName);
     }
 
     // THAY ĐỔI: Hàm này nhận vào một GameObject
