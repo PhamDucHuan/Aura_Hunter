@@ -9,6 +9,16 @@ public class EnemyMovement : MonoBehaviour, IUpdateListener
     [Tooltip("Quái vật sẽ đi qua lại trong khoảng cách này so với vị trí ban đầu.")]
     [SerializeField] private float patrolDistance = 5f;
 
+    [Header("Patrol Settings")]
+    [Tooltip("Điểm để bắn raycast kiểm tra tường phía trước.")]
+    [SerializeField] private Transform wallCheckPoint;
+    [Tooltip("Điểm để bắn raycast kiểm tra mép vực phía trước.")]
+    [SerializeField] private Transform edgeCheckPoint;
+    [Tooltip("Khoảng cách để phát hiện tường.")]
+    [SerializeField] private float wallCheckDistance = 0.2f;
+    [Tooltip("Layer của các vật cản (đất, tường...).")]
+    [SerializeField] private LayerMask groundLayer;
+
     [Header("Combat")]
     [SerializeField] private float attackRange = 1f;
     [SerializeField] private float stopChaseDistance = 1.5f;
@@ -121,13 +131,14 @@ public class EnemyMovement : MonoBehaviour, IUpdateListener
             return;
         }
 
-        anim.SetBool("isWalking", true);
+        // Điều kiện 1: Đã đến điểm cuối của patrolDistance
+        bool reachedPatrolPoint = Vector2.Distance(transform.position, currentTargetPosition) < 0.5f;
 
-        Vector2 direction = (currentTargetPosition - (Vector2)transform.position).normalized;
-        rb.velocity = new Vector2(direction.x * moveSpeed, rb.velocity.y);
-        FlipSprite(direction.x);
+        // Điều kiện 2: Phát hiện thấy vật cản (tường hoặc vực)
+        bool detectedObstacle = ShouldTurn();
 
-        if (Vector2.Distance(transform.position, currentTargetPosition) < 0.5f)
+        // Nếu một trong hai điều kiện đúng, đổi hướng
+        if (reachedPatrolPoint || detectedObstacle)
         {
             if (currentTargetPosition == rightPatrolPoint)
             {
@@ -138,6 +149,32 @@ public class EnemyMovement : MonoBehaviour, IUpdateListener
                 currentTargetPosition = rightPatrolPoint;
             }
         }
+
+        // Di chuyển về phía mục tiêu
+        anim.SetBool("isWalking", true);
+        Vector2 direction = (currentTargetPosition - (Vector2)transform.position).normalized;
+        rb.velocity = new Vector2(direction.x * moveSpeed, rb.velocity.y);
+        FlipSprite(direction.x);
+    }
+
+    private bool ShouldTurn()
+    {
+        // Xác định hướng di chuyển hiện tại
+        float moveDirection = Mathf.Sign(rb.velocity.x);
+        // Nếu đang đứng yên, lấy hướng từ sprite
+        if (moveDirection == 0)
+        {
+            // Giả sử scale.x < 0 là quay mặt sang phải
+            moveDirection = -Mathf.Sign(transform.localScale.x);
+        }
+
+        // Bắn Raycast kiểm tra tường
+        bool isHittingWall = Physics2D.Raycast(wallCheckPoint.position, new Vector2(moveDirection, 0), wallCheckDistance, groundLayer);
+
+        // Bắn Raycast kiểm tra vực
+        bool isAtEdge = !Physics2D.Raycast(edgeCheckPoint.position, Vector2.down, 2f, groundLayer);
+
+        return isHittingWall || isAtEdge;
     }
 
     // ... các hàm còn lại giữ nguyên ...
@@ -193,14 +230,26 @@ public class EnemyMovement : MonoBehaviour, IUpdateListener
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackRange);
 
-        // Vẽ đường tuần tra để dễ hình dung trong Scene
+        // Vẽ đường tuần tra TỐI ĐA
         Gizmos.color = Color.cyan;
-        // Lấy vị trí bắt đầu (nếu game đang chạy) hoặc vị trí hiện tại (trong Editor)
         Vector2 startPos = Application.isPlaying ? startingPosition : (Vector2)transform.position;
         Vector2 leftPoint = startPos - new Vector2(patrolDistance, 0);
         Vector2 rightPoint = startPos + new Vector2(patrolDistance, 0);
         Gizmos.DrawLine(leftPoint, rightPoint);
         Gizmos.DrawWireSphere(leftPoint, 0.3f);
         Gizmos.DrawWireSphere(rightPoint, 0.3f);
+
+        // Vẽ các tia raycast
+        if (wallCheckPoint != null)
+        {
+            Gizmos.color = Color.blue;
+            float direction = Application.isPlaying ? Mathf.Sign(rb.velocity.x) : 1;
+            Gizmos.DrawLine(wallCheckPoint.position, wallCheckPoint.position + new Vector3(wallCheckDistance * direction, 0, 0));
+        }
+        if (edgeCheckPoint != null)
+        {
+            Gizmos.color = Color.green;
+            Gizmos.DrawLine(edgeCheckPoint.position, edgeCheckPoint.position + new Vector3(0, -2f, 0));
+        }
     }
 }
