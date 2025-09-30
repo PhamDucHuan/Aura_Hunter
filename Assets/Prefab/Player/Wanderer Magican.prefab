@@ -252,7 +252,7 @@ Transform:
   m_GameObject: {fileID: 2590360737231985728}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.62, y: -0.2, z: 0}
+  m_LocalPosition: {x: 1.47, y: 0.23, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -333,6 +333,37 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &5258947873558458040
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7287133192986494711}
+  m_Layer: 3
+  m_Name: 'FirePoint '
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7287133192986494711
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5258947873558458040}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.65, y: 0.41, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3002815973892109675}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5358151330701026661
 GameObject:
   m_ObjectHideFlags: 0
@@ -479,6 +510,7 @@ Transform:
   m_Children:
   - {fileID: 537937468351481211}
   - {fileID: 38207780836781552}
+  - {fileID: 7287133192986494711}
   - {fileID: 2641653468571967901}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -681,12 +713,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb8a2b8030e45f141a091f3b36e3bf98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentAttackType: 1
   characterStats: {fileID: 11400000, guid: 01cec5fcdcfb6a74facff65ff30f3477, type: 2}
   attackPoint: {fileID: 38207780836781552}
   attackRange: 0.75
   enemyLayers:
     serializedVersion: 2
     m_Bits: 128
+  projectilePrefab: {fileID: 3555143224479463075, guid: 5bb09fdfc81a7be468dbe99a74c5ec36, type: 3}
+  firePoint: {fileID: 7287133192986494711}
   attackRate: 2
 --- !u!114 &4689478565282709037
 MonoBehaviour:

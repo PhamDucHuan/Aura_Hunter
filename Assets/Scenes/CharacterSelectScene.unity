@@ -849,7 +849,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterPrefabs:
   - {fileID: 6926066701512476990, guid: 99202a4511388004e8b2e7b1e601667c, type: 3}
-  - {fileID: 6926066701512476990, guid: 78edb57c4cfba0944ba729885289c5f9, type: 3}
+  - {fileID: 8489257399258710635, guid: 86028c6d8bbf3a54899b932acd489f8d, type: 3}
   - {fileID: 6926066701512476990, guid: a0df5bfbe940abf4394a2beb42f5af7d, type: 3}
 --- !u!4 &985535589
 Transform:
