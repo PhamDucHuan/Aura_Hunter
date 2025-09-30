@@ -104,14 +104,34 @@ public class PlayerMovement : MonoBehaviour, IFixedUpdateListener, IUpdateListen
 
     private void HandleAnimations()
     {
-        // Lấy tốc độ di chuyển ngang tuyệt đối để quyết định giữa idle và run
         float horizontalSpeed = Mathf.Abs(_rb.velocity.x);
-        _animator.SetFloat("speed", horizontalSpeed);
 
-        // Cập nhật trạng thái isGrounded
+        // Xác định xem nhân vật có đang di chuyển không (với một ngưỡng nhỏ)
+        bool isMoving = horizontalSpeed > 0.1f;
+
+        // Gửi trạng thái isWalking và isRunning đến Animator
+        // _isSprinting là biến đã có sẵn trong code của bạn để kiểm tra nút chạy nhanh
+        if (isMoving && _isSprinting)
+        {
+            // Nếu đang di chuyển VÀ chạy nhanh -> isRunning = true
+            _animator.SetBool("isWalking", false);
+            _animator.SetBool("isRunning", true);
+        }
+        else if (isMoving && !_isSprinting)
+        {
+            // Nếu đang di chuyển VÀ KHÔNG chạy nhanh -> isWalking = true
+            _animator.SetBool("isWalking", true);
+            _animator.SetBool("isRunning", false);
+        }
+        else
+        {
+            // Nếu không di chuyển -> cả hai đều false (về trạng thái Idle)
+            _animator.SetBool("isWalking", false);
+            _animator.SetBool("isRunning", false);
+        }
+
+        // Các animator cho nhảy và rơi vẫn giữ nguyên
         _animator.SetBool("isGrounded", _isGrounded);
-
-        // Cập nhật vận tốc trục Y để quyết định giữa jump và fall
         _animator.SetFloat("yVelocity", _rb.velocity.y);
     }
 
