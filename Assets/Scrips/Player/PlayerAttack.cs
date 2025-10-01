@@ -112,7 +112,6 @@ public class PlayerAttack : MonoBehaviour
             if (projectileScript != null)
             {
                 // 3. Xác định hướng bắn dựa trên hướng của Player (chính là transform.right)
-                // transform.right sẽ tự động lật khi scale.x của Player thay đổi
                 Vector2 launchDirection = new Vector2(Mathf.Sign(transform.localScale.x), 0f);
 
                 // 4. Gọi hàm Launch và truyền vào hướng và tốc độ

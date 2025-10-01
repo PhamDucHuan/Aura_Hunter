@@ -41,7 +41,7 @@ public class PlayerMovement : MonoBehaviour, IFixedUpdateListener, IUpdateListen
         _inputActions.Player.Sprint.performed += ctx => _isSprinting = true;
         _inputActions.Player.Sprint.canceled += ctx => _isSprinting = false;
 
-        _inputActions.Player.Jump.performed += OnJump;
+        _inputActions.Player.Jump.performed += Jump;
     }
 
     private void OnEnable()
@@ -145,13 +145,14 @@ public class PlayerMovement : MonoBehaviour, IFixedUpdateListener, IUpdateListen
         _rb.velocity = new Vector2(_moveInput.x * currentSpeed, _rb.velocity.y);
     }
 
-    private void OnJump(InputAction.CallbackContext context)
+    private void Jump(InputAction.CallbackContext context)
     {
+        _jumpsRemaining -= 1;
+
         // THAY ĐỔI: Kiểm tra xem có còn lượt nhảy nào không, thay vì chỉ kiểm tra isGrounded
         if (_jumpsRemaining > 0)
         {
             // Trừ đi một lượt nhảy
-            _jumpsRemaining =- 1;
 
             // Reset vận tốc y để lực nhảy luôn nhất quán
             _rb.velocity = new Vector2(_rb.velocity.x, 0);
