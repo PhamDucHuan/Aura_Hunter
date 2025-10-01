@@ -108,7 +108,259 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Light_charge_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 70
+        height: 64
+      alignment: 9
+      pivot: {x: 0.3738246, y: 0.5000002}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0d68104cef071ac4ea22bc1526de5a55
+      internalID: -942787654
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Light_charge_3
+      rect:
+        serializedVersion: 2
+        x: 103
+        y: 0
+        width: 139
+        height: 64
+      alignment: 9
+      pivot: {x: 0.3587965, y: 0.5000002}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cdaf31394197386439d30f8ab15d9cb6
+      internalID: 1520391252
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Light_charge_4
+      rect:
+        serializedVersion: 2
+        x: 241
+        y: 0
+        width: 139
+        height: 64
+      alignment: 9
+      pivot: {x: 0.2811345, y: 0.5000002}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 57ee5aa1d7453e544bbc330f3a4e32fc
+      internalID: 2143891627
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Light_charge_5
+      rect:
+        serializedVersion: 2
+        x: 361
+        y: 0
+        width: 139
+        height: 64
+      alignment: 9
+      pivot: {x: 0.3156033, y: 0.4539989}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7b47984056671da4e8c281a9df798308
+      internalID: -2142779003
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Light_charge_6
+      rect:
+        serializedVersion: 2
+        x: 501
+        y: 0
+        width: 139
+        height: 64
+      alignment: 9
+      pivot: {x: 0.2599536, y: 0.5000002}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c4bb1d5fa8a17d24ebbb20be9f45be95
+      internalID: -220385383
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Light_charge_7
+      rect:
+        serializedVersion: 2
+        x: 639
+        y: 0
+        width: 139
+        height: 64
+      alignment: 9
+      pivot: {x: 0.1822918, y: 0.5000002}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a1d0e87adbd910c4089fa64c2b1d3717
+      internalID: 1148211445
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Light_charge_8
+      rect:
+        serializedVersion: 2
+        x: 778
+        y: 0
+        width: 120
+        height: 64
+      alignment: 9
+      pivot: {x: 0.09756975, y: 0.4539989}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9bc847929a0d7474ab69984605b0cbcf
+      internalID: -1672683394
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Light_charge_9
+      rect:
+        serializedVersion: 2
+        x: 903
+        y: 0
+        width: 123
+        height: 64
+      alignment: 9
+      pivot: {x: 0.1116904, y: 0.4386647}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b9ea9275060d0234f82b642efb4521e7
+      internalID: -1416424781
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Light_charge_10
+      rect:
+        serializedVersion: 2
+        x: 1034
+        y: 0
+        width: 120
+        height: 64
+      alignment: 9
+      pivot: {x: 0.08061336, y: 0.48466602}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 86b6a336e78bbef40b30e3178c2abce9
+      internalID: -1334038658
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Light_charge_11
+      rect:
+        serializedVersion: 2
+        x: 1160
+        y: 0
+        width: 122
+        height: 64
+      alignment: 9
+      pivot: {x: 0.1380205, y: 0.4693324}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f305b7f0fb3dedb40b40f26ee2989bb1
+      internalID: 1497326866
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Light_charge_12
+      rect:
+        serializedVersion: 2
+        x: 1284
+        y: 0
+        width: 121
+        height: 64
+      alignment: 9
+      pivot: {x: 0.1755815, y: 0.4846666}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9541d0cf6a41eda44a8c99d74383821f
+      internalID: 1814421427
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Light_charge_13
+      rect:
+        serializedVersion: 2
+        x: 1421
+        y: 0
+        width: 122
+        height: 64
+      alignment: 9
+      pivot: {x: 0.0897567, y: 0.4846666}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7a31f480cbcac474d81a956a89fdc92d
+      internalID: 867021062
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -119,7 +371,21 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Light_charge_0: 401104401
+      Light_charge_1: 494396157
+      Light_charge_10: -1334038658
+      Light_charge_11: 1497326866
+      Light_charge_12: 1814421427
+      Light_charge_13: 867021062
+      Light_charge_2: -942787654
+      Light_charge_3: 1520391252
+      Light_charge_4: 2143891627
+      Light_charge_5: -2142779003
+      Light_charge_6: -220385383
+      Light_charge_7: 1148211445
+      Light_charge_8: -1672683394
+      Light_charge_9: -1416424781
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

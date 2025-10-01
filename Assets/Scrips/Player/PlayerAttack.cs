@@ -17,13 +17,15 @@ public class PlayerAttack : MonoBehaviour
     // <<< Cài đặt cũ cho tầm gần được giữ nguyên >>>
     [Header("Melee Attack Settings")]
     [SerializeField] private Transform attackPoint;
-    [SerializeField] private float attackRange = 0.5f;
+    [SerializeField] private float attackMelee = 0.5f;
+    [SerializeField] private float attackMeleeDelay = 0.5f;
     [SerializeField] private LayerMask enemyLayers;
 
     // <<< THÊM MỚI: Cài đặt cho tấn công tầm xa >>>
     [Header("Ranged Attack Settings")]
     [SerializeField] private GameObject projectilePrefab; // Prefab của viên đạn
     [SerializeField] private Transform firePoint; // Vị trí đạn được bắn ra
+    [SerializeField] private float attackRangeDelay = 0.5f;
     [SerializeField] private float projectileSpeed = 20f;
 
     [Header("Attack Cooldown")]
@@ -70,7 +72,7 @@ public class PlayerAttack : MonoBehaviour
         // Kiểm tra kiểu tấn công hiện tại
         if (currentAttackType == AttackType.Melee)
         {
-            PerformMeleeAttack();
+            StartCoroutine(PerformMeleeAttack());
         }
         else // if (currentAttackType == AttackType.Ranged)
         {
@@ -78,11 +80,12 @@ public class PlayerAttack : MonoBehaviour
         }
     }
 
-    private void PerformMeleeAttack()
+    private IEnumerator PerformMeleeAttack()
     {
         // Logic tấn công tầm gần cũ
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackMelee, enemyLayers);
 
+        yield return new WaitForSeconds(attackMeleeDelay);
         foreach (Collider2D enemy in hitEnemies)
         {
             Debug.Log("We hit " + enemy.name);
@@ -144,7 +147,7 @@ public class PlayerAttack : MonoBehaviour
         if (attackPoint != null)
         {
             Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(attackPoint.position, attackRange);
+            Gizmos.DrawWireSphere(attackPoint.position, attackMelee);
         }
         // Vẽ điểm cho tầm xa
         if (firePoint != null)

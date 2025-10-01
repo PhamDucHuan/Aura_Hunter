@@ -43,12 +43,12 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 25
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -108,7 +108,301 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Flame_jet_9
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 128
+        height: 68
+      alignment: 9
+      pivot: {x: 0.4937611, y: 0.3982219}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 87eb1a11b5f5f3344be03749ffb4866d
+      internalID: 1496436552
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flame_jet_10
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 128
+        height: 67
+      alignment: 9
+      pivot: {x: 0.5020797, y: 0.4046488}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ddfd1a3e5e41c3943a9209d404d0e786
+      internalID: 91406339
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flame_jet_11
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 128
+        height: 67
+      alignment: 9
+      pivot: {x: 0.5045335, y: 0.4133893}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d992ae2f42b39284ea7a80290f88af4d
+      internalID: -1083514149
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flame_jet_12
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 0
+        width: 128
+        height: 69
+      alignment: 9
+      pivot: {x: 0.5045335, y: 0.36123458}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7cad8019fb901c54daebc4903447148f
+      internalID: 136813542
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flame_jet_13
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 0
+        width: 128
+        height: 70
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3599424}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 25abc1b9632d9954eb0a4b04f9fe318f
+      internalID: 1770913845
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flame_jet_14
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 0
+        width: 128
+        height: 70
+      alignment: 9
+      pivot: {x: 0.4892278, y: 0.3670357}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5d5cb3204a1c1e4428ffdb014c074009
+      internalID: -2122793837
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flame_jet_15
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 0
+        width: 128
+        height: 71
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3676944}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0a8198aa8a24aef479a0f61894992626
+      internalID: -1147864134
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flame_jet_16
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 0
+        width: 128
+        height: 80
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3515328}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cc3468671066dca42ae9030e28a66146
+      internalID: 1509382621
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flame_jet_17
+      rect:
+        serializedVersion: 2
+        x: 1023
+        y: 0
+        width: 128
+        height: 81
+      alignment: 9
+      pivot: {x: 0.49679947, y: 0.3381967}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 59de17f972945e942892dc605d18a391
+      internalID: -1141851175
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flame_jet_18
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 0
+        width: 128
+        height: 77
+      alignment: 9
+      pivot: {x: 0.4965124, y: 0.3724497}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a5e6977656e190148b556fc5b96414e1
+      internalID: -404253172
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flame_jet_19
+      rect:
+        serializedVersion: 2
+        x: 1280
+        y: 0
+        width: 128
+        height: 77
+      alignment: 9
+      pivot: {x: 0.5139513, y: 0.36085412}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a9ba7169d7742754b8964bb824e97420
+      internalID: -966192758
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flame_jet_20
+      rect:
+        serializedVersion: 2
+        x: 1408
+        y: 0
+        width: 128
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7c5cdcf6edd8c1b4e9220d9fb841b527
+      internalID: 373978904
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flame_jet_21
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 0
+        width: 128
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5a2f0fcd402c938488640fe3b25bc19e
+      internalID: 1023778622
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flame_jet_22
+      rect:
+        serializedVersion: 2
+        x: 1664
+        y: 0
+        width: 128
+        height: 69
+      alignment: 9
+      pivot: {x: 0.5, y: 0.4717909}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f5dbe93935e9d504794422cf48aff5ab
+      internalID: -901080401
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -119,7 +413,30 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Flame_jet_0: -729933964
+      Flame_jet_1: 1792105320
+      Flame_jet_10: 91406339
+      Flame_jet_11: -1083514149
+      Flame_jet_12: 136813542
+      Flame_jet_13: 1770913845
+      Flame_jet_14: -2122793837
+      Flame_jet_15: -1147864134
+      Flame_jet_16: 1509382621
+      Flame_jet_17: -1141851175
+      Flame_jet_18: -404253172
+      Flame_jet_19: -966192758
+      Flame_jet_2: -1265877523
+      Flame_jet_20: 373978904
+      Flame_jet_21: 1023778622
+      Flame_jet_22: -901080401
+      Flame_jet_3: -580233892
+      Flame_jet_4: -206011057
+      Flame_jet_5: -2069136145
+      Flame_jet_6: 1611698687
+      Flame_jet_7: -1831623445
+      Flame_jet_8: 1391656068
+      Flame_jet_9: 1496436552
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
