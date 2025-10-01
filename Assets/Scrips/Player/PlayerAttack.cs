@@ -99,8 +99,13 @@ public class PlayerAttack : MonoBehaviour
 
     private IEnumerator PerformRangedAttack()
     {
+        yield return new WaitForSeconds(0.6f); // Đợi một chút để đồng bộ với animation nếu cần
+
         // Logic tấn công tầm xa mới
-        yield return new WaitForSeconds(0.8f); // Đợi một chút để đồng bộ với animation nếu cần
+        Vector2 launchDirection = new Vector2(Mathf.Sign(transform.localScale.x), 0f);
+
+        yield return new WaitForSeconds(0.2f); // Đợi một chút để đồng bộ với animation nếu cần
+
         if (projectilePrefab != null && firePoint != null)
         {
             // 1. Tạo ra viên đạn
@@ -112,7 +117,6 @@ public class PlayerAttack : MonoBehaviour
             if (projectileScript != null)
             {
                 // 3. Xác định hướng bắn dựa trên hướng của Player (chính là transform.right)
-                Vector2 launchDirection = new Vector2(Mathf.Sign(transform.localScale.x), 0f);
 
                 // 4. Gọi hàm Launch và truyền vào hướng và tốc độ
                 projectileScript.Launch(launchDirection, projectileSpeed);
