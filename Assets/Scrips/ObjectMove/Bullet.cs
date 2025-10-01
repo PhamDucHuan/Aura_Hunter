@@ -6,7 +6,7 @@ public class Bullet : MonoBehaviour
 {
     [Header("Settings")]
     // [SerializeField] private float speed = 20f; // Tốc độ sẽ được truyền từ PlayerAttack
-    [SerializeField] private int damage = 15;
+    [SerializeField] public int damage = 15;
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private float lifeTime = 3f;
 

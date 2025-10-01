@@ -848,9 +848,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterPrefabs:
-  - {fileID: 6926066701512476990, guid: 99202a4511388004e8b2e7b1e601667c, type: 3}
+  - {fileID: 4467709913989767468, guid: 5598780c055d0cf4e8fdf3b98d1052f3, type: 3}
+  - {fileID: 3816805960923304491, guid: 4965d7530c7a6e24db80dfde39df3dbb, type: 3}
   - {fileID: 8489257399258710635, guid: 86028c6d8bbf3a54899b932acd489f8d, type: 3}
-  - {fileID: 6926066701512476990, guid: a0df5bfbe940abf4394a2beb42f5af7d, type: 3}
 --- !u!4 &985535589
 Transform:
   m_ObjectHideFlags: 0

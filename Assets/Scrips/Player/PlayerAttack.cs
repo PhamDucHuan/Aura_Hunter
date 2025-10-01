@@ -97,7 +97,7 @@ public class PlayerAttack : MonoBehaviour
         }
     }
 
-    IEnumerator PerformRangedAttack()
+    private IEnumerator PerformRangedAttack()
     {
         // Logic tấn công tầm xa mới
         yield return new WaitForSeconds(0.8f); // Đợi một chút để đồng bộ với animation nếu cần
@@ -108,7 +108,7 @@ public class PlayerAttack : MonoBehaviour
 
             // 2. Lấy script Projectile từ viên đạn vừa tạo
             Bullet projectileScript = projectileGO.GetComponent<Bullet>();
-
+            projectileScript.damage = characterStats.baseDamage; // Gán sát thương từ CharacterStats
             if (projectileScript != null)
             {
                 // 3. Xác định hướng bắn dựa trên hướng của Player (chính là transform.right)
