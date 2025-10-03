@@ -716,12 +716,15 @@ MonoBehaviour:
   currentAttackType: 1
   characterStats: {fileID: 11400000, guid: 01cec5fcdcfb6a74facff65ff30f3477, type: 2}
   attackPoint: {fileID: 38207780836781552}
-  attackRange: 0.75
+  attackMelee: 0.5
+  attackMeleeDelay: 0.5
   enemyLayers:
     serializedVersion: 2
     m_Bits: 128
   projectilePrefab: {fileID: 3555143224479463075, guid: 5bb09fdfc81a7be468dbe99a74c5ec36, type: 3}
   firePoint: {fileID: 7287133192986494711}
+  attackRangeDelay: 0.5
+  projectileSpeed: 20
   attackRate: 2
 --- !u!114 &4689478565282709037
 MonoBehaviour:
