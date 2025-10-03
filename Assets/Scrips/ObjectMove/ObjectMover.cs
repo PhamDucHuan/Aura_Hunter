@@ -96,6 +96,28 @@ public class ObjectMover : MonoBehaviour, IUpdateListener
         }
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        // Kiểm tra xem đối tượng va chạm có phải là Player không
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            // Gắn Player làm con của vật thể này
+            // Khi đó, Player sẽ di chuyển theo mọi chuyển động của vật thể cha
+            collision.transform.SetParent(this.transform);
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        // Kiểm tra xem đối tượng vừa rời đi có phải là Player không
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            // "Tháo" Player ra, không còn là con của vật thể này nữa
+            // Player sẽ trở lại di chuyển độc lập
+            collision.transform.SetParent(null);
+        }
+    }
+
     // (Tùy chọn) Vẽ ra đường di chuyển trong Scene View để dễ hình dung
     private void OnDrawGizmosSelected()
     {

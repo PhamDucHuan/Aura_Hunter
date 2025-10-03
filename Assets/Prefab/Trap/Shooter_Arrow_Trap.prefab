@@ -41,6 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 763835177355365454}
   - component: {fileID: 3236489382080540031}
+  - component: {fileID: 5958177663315528990}
   - component: {fileID: 3733964985116134599}
   m_Layer: 0
   m_Name: Shooter_Arrow_Trap
@@ -64,7 +65,7 @@ Transform:
   m_Children:
   - {fileID: 4612460886794506860}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &3236489382080540031
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -117,6 +118,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &5958177663315528990
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8986272343903561414}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ffc01ce11f5ccbf4f991e97e2e775c03, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &3733964985116134599
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Bullet : MonoBehaviour
+public class BulletTrap : MonoBehaviour
 {
     [Header("Settings")]
     // [SerializeField] private float speed = 20f; // Tốc độ sẽ được truyền từ PlayerAttack
@@ -26,15 +26,18 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D hitInfo)
     {
-        EnemyHealth enemyHealth = hitInfo.GetComponent<EnemyHealth>();
-        if (enemyHealth != null)
+        if (hitInfo.CompareTag("Player"))
         {
-            enemyHealth.TakeDamage(damage);
-        }
+            // 2. L?y component CharacterManager t? ??i t??ng Player
+            CharacterManager playerManager = hitInfo.GetComponent<CharacterManager>();
 
-        if (!hitInfo.CompareTag("Player"))
-        {
-            Destroy(gameObject);
+            // 3. N?u tìm th?y, g?i hàm TakeDamage ?? tr? máu
+            if (playerManager != null)
+            {
+                playerManager.TakeDamage(damage);
+            }
+
+            Destroy(gameObject, 0.2f);
         }
     }
 }

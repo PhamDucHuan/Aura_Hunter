@@ -79,6 +79,7 @@ public class ProjectileTrap : MonoBehaviour
 
     private void Shoot()
     {
+        Debug.Log("Bẫy bắn!", this);
         if (projectilePrefab == null || firePoint == null)
         {
             Debug.LogWarning("Chưa gán Projectile Prefab hoặc Fire Point cho bẫy!", this);
@@ -87,7 +88,7 @@ public class ProjectileTrap : MonoBehaviour
 
         Vector2 shotDirection = GetDirectionVector();
         GameObject projectileGO = Instantiate(projectilePrefab, firePoint.position, Quaternion.identity);
-        Bullet projectileScript = projectileGO.GetComponent<Bullet>();
+        BulletTrap projectileScript = projectileGO.GetComponent<BulletTrap>();
         if (projectileScript != null)
         {
             projectileScript.Launch(shotDirection, projectileSpeed);
