@@ -23,6 +23,8 @@ public class PlayerMovement : MonoBehaviour, IFixedUpdateListener, IUpdateListen
     [SerializeField] private int maxJumps = 2; // MỚI: Số lần nhảy tối đa
     private int _jumpsRemaining; // MỚI: Biến đếm số lần nhảy còn lại
 
+    private float movementLockTimer = 0f;
+
     // Biến nội bộ
     private Vector2 _moveInput;
     private bool _isSprinting = false;
@@ -72,16 +74,26 @@ public class PlayerMovement : MonoBehaviour, IFixedUpdateListener, IUpdateListen
 
     public void OnFixedUpdate(float deltaTime)
     {
-        // Kiểm tra xem nhân vật có đang trên mặt đất không
         CheckIfGrounded();
 
-        // Xử lý di chuyển ngang
-        HandleMovement();
-
-        // Xử lý lật hình nhân vật
-        FlipCharacter();
+        // <<< THAY ĐỔI: Thêm kiểm tra timer ở đây >>>
+        if (movementLockTimer > 0)
+        {
+            // Nếu đang bị khóa, đếm ngược timer và không làm gì cả
+            movementLockTimer -= deltaTime;
+        }
+        else
+        {
+            // Nếu không bị khóa, cho phép di chuyển và lật nhân vật
+            HandleMovement();
+            FlipCharacter();
+        }
     }
 
+    public void DisableMovement(float duration)
+    {
+        movementLockTimer = duration;
+    }
     private void CheckIfGrounded()
     {
         bool wasGrounded = _isGrounded; // Lưu lại trạng thái của frame trước

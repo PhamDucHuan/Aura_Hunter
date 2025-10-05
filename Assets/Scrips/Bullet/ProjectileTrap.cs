@@ -79,7 +79,7 @@ public class ProjectileTrap : MonoBehaviour
 
     private void Shoot()
     {
-        Debug.Log("Bẫy bắn!", this);
+        //Debug.Log("Bẫy bắn!", this);
         if (projectilePrefab == null || firePoint == null)
         {
             Debug.LogWarning("Chưa gán Projectile Prefab hoặc Fire Point cho bẫy!", this);

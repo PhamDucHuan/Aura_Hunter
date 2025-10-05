@@ -37,7 +37,7 @@ public class BulletTrap : MonoBehaviour
                 playerManager.TakeDamage(damage);
             }
 
-            Destroy(gameObject, 0.2f);
+            Destroy(gameObject);
         }
     }
 }
